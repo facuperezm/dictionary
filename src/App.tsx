@@ -1,5 +1,6 @@
-import React from "react";
 import axios from "axios";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 interface Phonetic {
   text: string;
@@ -26,35 +27,57 @@ interface Word {
   meanings: Meaning[];
 }
 
-export default function App() {
-  const [word, setWord] = React.useState<Word>({
-    word: "",
-    phonetic: "",
-    phonetics: [],
-    origin: "",
-    meanings: [],
-  });
+const queryClient = new QueryClient();
 
-  const getData = async () => {
-    try {
-      const res = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/en/pan`
+function Words(): JSX.Element {
+  const { isLoading, error, data, isFetching } = useQuery<Word>(
+    "words",
+    async () => {
+      const response = await axios.get<Word[]>(
+        "https://api.dictionaryapi.dev/api/v2/entries/en/hello"
       );
-      setWord(res.data[0]);
-    } catch (err) {
-      console.log(err);
+      return response.data[0];
     }
-  };
+  );
 
-  React.useEffect(() => {
-    getData();
-  }, []);
-  console.log(word, "this is word");
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isFetching) {
+    return <div>Fetching...</div>;
+  }
 
   return (
-    <>
-      <h1>{word.phonetic}</h1>
-      <p>{word.word}</p>
-    </>
+    <div className="dark:bg-black dark:text-white">
+      <h1 className="text-5xl">{data.word}</h1>
+      <div>
+        {data.phonetics.map((phonetic: Phonetic, index: number) => (
+          <div key={index}>
+            <h2 className="font-bold">{phonetic.text}</h2>
+          </div>
+        ))}
+        {data.meanings.map((meaning: Meaning) => (
+          <div key={meaning.partOfSpeech}>
+            <h2 className="border-b my-5 font-serif">{meaning.partOfSpeech}</h2>
+            {meaning.definitions.map((definition: Definition) => (
+              <div key={definition.definition}>
+                <div className="font-thin">Meaning</div>
+                <h3>{definition.definition}</h3>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <ReactQueryDevtools initialIsOpen />
+    </div>
+  );
+}
+
+export default function App(): JSX.Element {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Words />
+    </QueryClientProvider>
   );
 }
