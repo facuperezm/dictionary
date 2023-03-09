@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Wotfard";
+  src: url("../src/fonts/wotfard.ttf") format("truetype");
+}

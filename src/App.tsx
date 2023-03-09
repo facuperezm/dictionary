@@ -1,83 +1,44 @@
-import axios from "axios";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-
-interface Phonetic {
-  text: string;
-  audio?: string;
-}
-
-interface Definition {
-  definition: string;
-  example: string;
-  synonyms: string[];
-  antonyms: string[];
-}
-
-interface Meaning {
-  partOfSpeech: string;
-  definitions: Definition[];
-}
-
-interface Word {
-  word: string;
-  phonetic: string;
-  phonetics: Phonetic[];
-  origin: string;
-  meanings: Meaning[];
-}
+import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import DarkModeToggle from "./components/DarkModeToggle";
+import Words from "./components/Words";
 
 const queryClient = new QueryClient();
 
-function Words(): JSX.Element {
-  const { isLoading, error, data, isFetching } = useQuery<Word>(
-    "words",
-    async () => {
-      const response = await axios.get<Word[]>(
-        "https://api.dictionaryapi.dev/api/v2/entries/en/hello"
-      );
-      return response.data[0];
-    }
-  );
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isFetching) {
-    return <div>Fetching...</div>;
-  }
-
-  return (
-    <div className="dark:bg-black dark:text-white">
-      <h1 className="text-5xl">{data.word}</h1>
-      <div>
-        {data.phonetics.map((phonetic: Phonetic, index: number) => (
-          <div key={index}>
-            <h2 className="font-bold">{phonetic.text}</h2>
-          </div>
-        ))}
-        {data.meanings.map((meaning: Meaning) => (
-          <div key={meaning.partOfSpeech}>
-            <h2 className="border-b my-5 font-serif">{meaning.partOfSpeech}</h2>
-            {meaning.definitions.map((definition: Definition) => (
-              <div key={definition.definition}>
-                <div className="font-thin">Meaning</div>
-                <h3>{definition.definition}</h3>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-      <ReactQueryDevtools initialIsOpen />
-    </div>
-  );
-}
-
 export default function App(): JSX.Element {
+  const [theme, setTheme] = React.useState<"dark" | "light">("dark");
+  const [searchWord, setSearchWord] = React.useState<string>("");
+  const [word, setWord] = React.useState<string>("");
+
+  React.useEffect(() => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, []);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setWord(searchWord);
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
-      <Words />
+      <div
+        className={`min-h-screen font-sans ${theme === "dark" ? "dark" : ""}`}
+      >
+        <form onSubmit={handleSubmit}>
+          <input
+            className="bg-gray-200 rounded-md p-2"
+            type="text"
+            value={searchWord}
+            onChange={(e) => setSearchWord(e.target.value)}
+          />
+        </form>
+        <DarkModeToggle theme={theme} setTheme={setTheme} />
+        <Words word={word} />
+      </div>
     </QueryClientProvider>
   );
 }
