@@ -21,4 +21,11 @@ export interface Word {
   phonetics: Phonetic[];
   origin: string;
   meanings: Meaning[];
+  license: License;
+  sourceUrls: string[];
+}
+
+export interface License {
+  name: string;
+  url: string;
 }

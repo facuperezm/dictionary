@@ -12,8 +12,11 @@ export default function DarkModeToggle({
   };
 
   return (
-    <button className="bg-gray-200 rounded-md p-2" onClick={handleThemeSwitch}>
-      {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+    <button
+      className="bg-white dark:bg-gray-800 focus:outline-none focus:shadow-outline border border-gray-300 dark:border-gray-600 block appearance-none rounded-md ml-1 p-2"
+      onClick={handleThemeSwitch}
+    >
+      {theme === "dark" ? "🌑" : "🌞"}
     </button>
   );
 }
