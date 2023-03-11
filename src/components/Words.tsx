@@ -26,7 +26,7 @@ export default function Words({ word }: Props): JSX.Element {
 
   if (!word) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center">
+      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
         <p className="text-gray-800 dark:text-gray-50 text-lg">
           Search your word
         </p>
@@ -36,7 +36,7 @@ export default function Words({ word }: Props): JSX.Element {
 
   if (isLoading) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center">
+      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
         <p className="text-gray-800 dark:text-gray-50 text-lg ">Loading...</p>
       </div>
     );
@@ -44,7 +44,7 @@ export default function Words({ word }: Props): JSX.Element {
 
   if (error) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center">
+      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
         <p className="text-red-500 text-lg ">
           Sorry, there was an error fetching the word. Please try again later.
         </p>
@@ -54,14 +54,14 @@ export default function Words({ word }: Props): JSX.Element {
 
   if (isFetching) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center">
+      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
         <p className="text-gray-800 dark:text-gray-50 text-lg ">Fetching...</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 dark:text-gray-50 px-12 flex-1 pb-4">
+    <div className="bg-gray-100 dark:bg-gray-900 dark:text-gray-50 px-12 flex-1 pb-4 dotted-background">
       <h1 className="text-5xl mb-2">{data?.word}</h1>
 
       <div className="">

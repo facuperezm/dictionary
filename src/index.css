@@ -6,3 +6,10 @@
   font-family: "Wotfard";
   src: url("../src/fonts/wotfard.ttf") format("truetype");
 }
+
+.dotted-background,
+body,
+nav {
+  background-image: radial-gradient(#333333 0px, transparent 1px);
+  background-size: 30px 30px;
+}
