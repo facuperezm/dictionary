@@ -47,7 +47,7 @@ export default function App(): JSX.Element {
           >
             <div className="rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-0.5">
               <input
-                className="w-full max-w-lg sm:max-w-2xl rounded-md py-2 px-4  focus:outline-none focus:shadow-outline dark:bg-gray-800 bg-gray-50 appearance-none leading-normaL"
+                className="w-full max-w-3xl sm:max-w-2xl rounded-md py-2 px-4  focus:outline-none focus:shadow-outline dark:bg-gray-800 bg-gray-50 appearance-none leading-normaL"
                 type="text"
                 value={searchWord}
                 placeholder="Search for any word..."
