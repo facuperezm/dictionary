@@ -39,7 +39,9 @@ export default function App(): JSX.Element {
       >
         <nav className="flex flex-wrap items-center justify-center md:justify-between py-6 px-6 md:px-12 bg-inherit dark:bg-gray-900 dark:text-gray-50 text-gray-900 ">
           <div className="flex flex-row items-end mr-6 justify-end ">
-            <h1 className="text-xl pb-1 font-bold">Dictionary</h1>
+            <a href="/">
+              <h1 className="text-xl pb-1 font-bold">Dictionary</h1>
+            </a>
           </div>
           <form
             onSubmit={handleSubmit}
