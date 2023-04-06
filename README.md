@@ -14,6 +14,15 @@ Dictionary is a simple app that allows you to search for words and their definit
 
 **Deploy:** Vercel
 
+## Optimizations
+
+- [x] Fetch data from API
+- [x] Responsive layout (mobile/tablet/desktop)
+- [x] Dark/Light theme
+- [ ] Plays pronunciation
+- [ ] Language Variant selector.
+- [ ] Font selector.
+
 ## Acknowledgements
 
 - [Tailwind CSS Docs](https://tailwindcss.com/docs/installation)
