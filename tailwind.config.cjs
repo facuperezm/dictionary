@@ -5,13 +5,6 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      colors: {
-        red: "#f00",
-        blue: "#00f",
-      },
-      linearGradientColors: (theme) => theme("colors"),
-      radialGradientColors: (theme) => theme("colors"),
-      conicGradientColors: (theme) => theme("colors"),
       fontFamily: {
         sans: ["wotfard", "sans-serif"],
       },

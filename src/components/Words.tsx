@@ -26,25 +26,23 @@ export default function Words({ word }: Props): JSX.Element {
 
   if (!word) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
-        <p className="text-gray-800 dark:text-gray-50 text-lg">
-          Search your word
-        </p>
+      <div className="h-screen flex justify-center items-center">
+        <p className="text-lg">Search your word</p>
       </div>
     );
   }
 
   if (isLoading) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
-        <p className="text-gray-800 dark:text-gray-50 text-lg ">Loading...</p>
+      <div className="h-screen flex justify-center items-center">
+        <p className="text-lg ">Loading...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
+      <div className="h-screen flex justify-center items-center">
         <p className="text-red-500 text-lg ">
           Sorry, there was an error fetching the word. Please try again later.
         </p>
@@ -54,20 +52,20 @@ export default function Words({ word }: Props): JSX.Element {
 
   if (isFetching) {
     return (
-      <div className="h-screen bg-white dark:bg-gray-900 flex justify-center items-center dotted-background">
-        <p className="text-gray-800 dark:text-gray-50 text-lg ">Fetching...</p>
+      <div className="h-screen flex justify-center items-center">
+        <p className="text-lg">Fetching...</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 dark:text-gray-50 px-12 flex-1 pb-4 dotted-background">
+    <div className="px-12 flex-1 pb-4">
       <h1 className="text-5xl mb-2">{data?.word}</h1>
 
       <div className="">
         {data?.phonetics.map((phonetic: Phonetic, index: number) => (
-          <div key={index} className="">
-            <span className="">{phonetic.text}</span>
+          <div key={index}>
+            <span>{phonetic.text}</span>
           </div>
         ))}
 
